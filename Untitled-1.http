@@ -1,0 +1,7 @@
+POST http://localhost:3000/board/remove
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmOTU0NDljNmYwNTE4MGI2OWJjYjVhMCIsImlhdCI6MTYwNDQ4NTMwNH0.5nRbxzKn6R0Ou9N3oUDX5uM3QamZp46UUiSdcAvTLgk
+
+{
+  "id":"5f954266bc401d0ae806da04"
+}
