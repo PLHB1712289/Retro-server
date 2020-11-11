@@ -1,21 +1,20 @@
 const { signIn, signUp } = require("./authServices");
 
-const POST_signUp = async (req, res, next) => {
-  console.log("POST_signUp");
-  const signUpResult = await signUp(req.body);
+const POST_signUp = async (req, res) => {
+  const { status, errorMessage: message } = await signUp(req.body);
 
-  const resStatus = signUpResult ? "Success" : "Failed";
-
-  res.send(resStatus);
+  res.status(200).json({ success: status, message });
 };
 
-const POST_signIn = async (req, res, next) => {
-  const token = await signIn(req.body);
+const POST_signIn = async (req, res) => {
+  const { token, errorMessage } = await signIn(req.body);
 
   if (token !== null) {
-    res.json({ message: "ok", token: token });
+    res
+      .status(200)
+      .json({ success: true, message: "Sign in success", token: token });
   } else {
-    res.status(401).json({ message: "no such user found" });
+    res.status(200).json({ success: false, message: errorMessage });
   }
 };
 

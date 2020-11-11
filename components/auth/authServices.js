@@ -1,5 +1,7 @@
 const userModel = require("../../database/schema/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const saltRound = 10;
 
 const signUp = async (userInfo) => {
   const { email, fullName, password } = userInfo;
@@ -7,13 +9,18 @@ const signUp = async (userInfo) => {
   const isExistUser = await userModel.findOne({ email: email });
 
   if (isExistUser) {
-    return false;
+    return { status: false, errorMessage: "User already exist" };
   } else {
-    const newUser = new userModel({ email, fullName, password });
-    await newUser.save();
-    return true;
+    const hashCodePassword = bcrypt.hashSync(password, saltRound);
+    const newUser = new userModel({
+      email,
+      fullName,
+      password: hashCodePassword,
+    });
+
+    newUser.save();
+    return { status: true, errorMessage: "Sign up success" };
   }
-  return false;
 };
 
 const signIn = async (userInfo) => {
@@ -22,12 +29,14 @@ const signIn = async (userInfo) => {
   const isExistUser = await userModel.findOne({ email: email });
 
   if (isExistUser) {
-    const payload = { id: isExistUser._id };
-    const token = jwt.sign(payload, "secret");
-    return token;
+    if (bcrypt.compareSync(password, isExistUser.password)) {
+      const payload = { id: isExistUser._id };
+      const token = jwt.sign(payload, "secret");
+      return { token, errorMessage: null };
+    } else return { token: null, errorMessage: "Error password!" };
   }
 
-  return null;
+  return { token: null, errorMessage: "User not found!" };
 };
 
 module.exports = { signUp, signIn };

@@ -5,7 +5,7 @@ const authenticate = require("../../passport/authenticate");
 const userController = require("./userController");
 
 /* GET home page. */
-router.get("/", authenticate(), userController.GET_userInfo);
+router.get("/", authenticate(), userController.GET_getUserInfo);
 
 router.post("/", authenticate(), userController.POST_changeUserInfo);
 

@@ -1,7 +1,8 @@
-POST http://localhost:3000/board/remove
+GET http://localhost:3000/board
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmOTU0NDljNmYwNTE4MGI2OWJjYjVhMCIsImlhdCI6MTYwNDQ4NTMwNH0.5nRbxzKn6R0Ou9N3oUDX5uM3QamZp46UUiSdcAvTLgk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWE0YzJkNDdlMTViMTQ2NmZhZmUzMCIsImlhdCI6MTYwNTEwMzg5NH0.A31nhHd8a-xPePxKwgAEAzQd8ziWF-kDluBHTMi0LaM
 
 {
-  "id":"5f954266bc401d0ae806da04"
+  "id": "5fabaa85f9283e27b9638b6b",
+  "email": "bao@gmail.com"
 }

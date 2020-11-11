@@ -3,8 +3,9 @@ const { Schema } = require("mongoose");
 
 const boardSchema = new Schema({
   title: String,
-  description: String,
+  dateCreate: Number,
   idUser: String,
+  shareWith: Number,
 });
 
 const boardModel = mongoose.model("board", boardSchema);
