@@ -1,8 +1,0 @@
-GET http://localhost:3000/board
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWE0YzJkNDdlMTViMTQ2NmZhZmUzMCIsImlhdCI6MTYwNTEwMzg5NH0.A31nhHd8a-xPePxKwgAEAzQd8ziWF-kDluBHTMi0LaM
-
-{
-  "id": "5fabaa85f9283e27b9638b6b",
-  "email": "bao@gmail.com"
-}
