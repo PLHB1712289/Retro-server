@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../../database/schema/user");
 const saltRound = 10;
-console.log("salt round ", saltRound);
 
 const getUserInfo = async (idUser) => {
   const userInfo = await userModel.findOne({ _id: idUser });
