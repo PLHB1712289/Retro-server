@@ -1,4 +1,4 @@
-const { signIn, signUp } = require("./authServices");
+const { signIn, signUp, signInWithSocialAccount } = require("./authServices");
 
 const POST_signUp = async (req, res) => {
   const { status, errorMessage: message } = await signUp(req.body);
@@ -18,4 +18,20 @@ const POST_signIn = async (req, res) => {
   }
 };
 
-module.exports = { POST_signUp, POST_signIn };
+const GET_callback = async (req, res, next) => {
+  const { token } = signInWithSocialAccount(req.user.id);
+
+  res.cookie("auth", token);
+  res.redirect(`${process.env.URL_CLIENT}/login`);
+};
+
+const GET_failed = async (req, res, next) => {
+  res.redirect(`${process.env.URL_CLIENT}/login`);
+};
+
+module.exports = {
+  POST_signUp,
+  POST_signIn,
+  GET_callback,
+  GET_failed,
+};

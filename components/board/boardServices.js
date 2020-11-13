@@ -120,18 +120,19 @@ const shareBoard = async ({ id, email }) => {
 
   try {
     const board = await boardModel.findOne(filter);
-    if (!board) return false;
+    if (!board) return { status: false, message: `Board is not exist.` };
 
     const user = await userModel.findOne({ email: email });
 
-    if (!user) return false;
+    if (!user)
+      return { status: false, message: `User "${email}" is not exist.` };
 
     if (JSON.stringify(board.idUser) === JSON.stringify(user._id)) {
-      return false;
+      return {
+        status: false,
+        message: `You cannot share this board with yourself.`,
+      };
     }
-
-    console.log("idUser ", idUser);
-    console.log("_id ", user._id);
 
     const query = {
       idBoard: id,
@@ -145,13 +146,23 @@ const shareBoard = async ({ id, email }) => {
       await newShare.save();
       board.shareWith = board.shareWith + 1;
       await board.save();
-      return true;
+      return {
+        status: true,
+        message: `Share success with "${email}".`,
+      };
     }
 
-    return false;
+    return {
+      status: false,
+      message: `You have shared this board with "${email}".`,
+    };
   } catch (e) {
     console.log("error");
-    return false;
+    console.log(e.message);
+    return {
+      status: false,
+      message: `Cannot connect server.`,
+    };
   }
 };
 

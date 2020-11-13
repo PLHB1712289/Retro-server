@@ -2,6 +2,7 @@ const userModel = require("../../database/schema/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRound = 10;
+const secretKey = "secret";
 
 const signUp = async (userInfo) => {
   const { email, fullName, password } = userInfo;
@@ -31,7 +32,7 @@ const signIn = async (userInfo) => {
   if (isExistUser) {
     if (bcrypt.compareSync(password, isExistUser.password)) {
       const payload = { id: isExistUser._id };
-      const token = jwt.sign(payload, "secret");
+      const token = jwt.sign(payload, secretKey);
       return { token, errorMessage: null };
     } else return { token: null, errorMessage: "Error password!" };
   }
@@ -39,4 +40,13 @@ const signIn = async (userInfo) => {
   return { token: null, errorMessage: "User not found!" };
 };
 
-module.exports = { signUp, signIn };
+const signInWithSocialAccount = (id) => {
+  const payload = { id };
+  const token = jwt.sign(payload, secretKey);
+
+  console.log("token", token);
+
+  return { token, errorMessage: "Sign in success" };
+};
+
+module.exports = { signUp, signIn, signInWithSocialAccount };

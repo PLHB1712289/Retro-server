@@ -96,13 +96,9 @@ const POST_changeBoard = async (req, res, next) => {
 };
 
 const POST_shareBoard = async (req, res, next) => {
-  const shareBoardStatus = await boardServices.shareBoard(req.body);
+  const { status, message } = await boardServices.shareBoard(req.body);
 
-  if (shareBoardStatus) {
-    res.status(200).json({ success: true, message: "Share board success" });
-  } else {
-    res.status(200).json({ success: false, message: "Share board failed" });
-  }
+  res.status(200).json({ success: status, message });
 };
 
 module.exports = {
