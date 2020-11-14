@@ -28,6 +28,7 @@ const io = require("socket.io")(server, {
 
 const configSocketIO = require("../socket.io");
 configSocketIO(io);
+
 // Socket io
 
 /**

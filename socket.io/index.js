@@ -17,19 +17,15 @@ const configSocketIO = (io) => {
     });
 
     socket.on(TAG_SOCKET_IO.REQUEST_CREATE, ({ idBoard, id, content, tag }) => {
-      socket
-        .to(idBoard)
-        .emit(TAG_SOCKET_IO.RESPONSE_CREATE, { id, tag, content });
+      io.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_CREATE, { id, tag, content });
     });
 
     socket.on(TAG_SOCKET_IO.REQUEST_REMOVE, ({ idBoard, id, tag }) => {
-      socket.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_REMOVE, { id, tag });
+      io.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_REMOVE, { id, tag });
     });
 
     socket.on(TAG_SOCKET_IO.REQUEST_EDIT, ({ idBoard, id, content, tag }) => {
-      socket
-        .to(idBoard)
-        .emit(TAG_SOCKET_IO.RESPONSE_EDIT, { id, tag, content });
+      io.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_EDIT, { id, tag, content });
     });
 
     socket.on("disconnect", () => {
