@@ -20,11 +20,14 @@ app.set("port", port);
  */
 
 const server = http.createServer(app);
+
 const io = require("socket.io")(server, {
   cors: true,
   origins: ["http://127.0.0.1:3000"],
 });
 
+const configSocketIO = require("../socket.io");
+configSocketIO(io);
 // Socket io
 
 /**
@@ -34,44 +37,6 @@ const io = require("socket.io")(server, {
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
-
-console.log("Socket.io");
-
-const TAG_SOCKET_IO = {
-  JOIN_ROOM: "join_room",
-  REQUEST_CREATE: "request_create",
-  REQUEST_REMOVE: "request_remove",
-  REQUEST_EDIT: "request_edit",
-  RESPONSE_CREATE: "response_create",
-  RESPONSE_REMOVE: "response_remove",
-  RESPONSE_EDIT: "response_edit",
-};
-
-io.on("connection", function (socket) {
-  console.log(`[${socket.id}]: connected.`);
-
-  socket.on(TAG_SOCKET_IO.JOIN_ROOM, (idBoard) => {
-    socket.join(idBoard);
-  });
-
-  socket.on(TAG_SOCKET_IO.REQUEST_CREATE, ({ idBoard, id, content, tag }) => {
-    socket
-      .to(idBoard)
-      .emit(TAG_SOCKET_IO.RESPONSE_CREATE, { id, tag, content });
-  });
-
-  socket.on(TAG_SOCKET_IO.REQUEST_REMOVE, ({ idBoard, id, tag }) => {
-    socket.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_REMOVE, { id, tag });
-  });
-
-  socket.on(TAG_SOCKET_IO.REQUEST_EDIT, ({ idBoard, id, content, tag }) => {
-    socket.to(idBoard).emit(TAG_SOCKET_IO.RESPONSE_EDIT, { id, tag, content });
-  });
-
-  socket.on("disconnect", () => {
-    console.log(`[${socket.id}]: disconnected.`);
-  });
-});
 
 /**
  * Normalize a port into a number, string, or false.
