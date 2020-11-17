@@ -101,6 +101,16 @@ const POST_shareBoard = async (req, res, next) => {
   res.status(200).json({ success: status, message });
 };
 
+const POST_dndBoardItem = async (req, res, next) => {
+  const idBoard = req.params.id;
+  const { status, message } = await boardServices.dndBoardItem(
+    idBoard,
+    req.body
+  );
+
+  res.status(200).json({ success: status, message });
+};
+
 module.exports = {
   GET_getAllBoard,
   POST_createNewBoard,
@@ -111,4 +121,5 @@ module.exports = {
   POST_changeBoard,
   POST_changeBoardItem,
   POST_shareBoard,
+  POST_dndBoardItem,
 };

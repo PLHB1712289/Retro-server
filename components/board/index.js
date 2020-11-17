@@ -22,5 +22,6 @@ router.post(
   authenticate(),
   boardController.POST_removeBoardItem
 );
+router.post("/:id/dnd-item", authenticate(), boardController.POST_dndBoardItem);
 
 module.exports = router;

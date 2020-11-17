@@ -61,7 +61,7 @@ const addBoardItem = async (idBoard, item) => {
 const removeBoardItem = async (idBoard, item) => {
   const { id } = item;
 
-  const { deletedCount } = await itemModel.remove({ _id: id });
+  const { deletedCount } = await itemModel.deleteOne({ _id: id });
 
   if (deletedCount === 0) return false;
   return true;
@@ -86,11 +86,27 @@ const changeBoardItem = async (idBoard, item) => {
   }
 };
 
-const removeBoard = async (idBoard) => {
-  await itemModel.remove({ idBoard: idBoard });
-  await shareModel.remove({ idBoard: idBoard });
+const dndBoardItem = async (idBoard, item) => {
+  const { id, newTag } = item;
 
-  const { deletedCount } = await boardModel.remove({ _id: idBoard });
+  const filter = { _id: id, idBoard };
+
+  try {
+    const doc = await itemModel.findOne(filter);
+    doc.tag = newTag;
+    await doc.save();
+
+    return { status: true, message: "Success." };
+  } catch (e) {
+    return { status: false, message: "Item not exist." };
+  }
+};
+
+const removeBoard = async (idBoard) => {
+  await itemModel.deleteMany({ idBoard: idBoard });
+  await shareModel.deleteMany({ idBoard: idBoard });
+
+  const { deletedCount } = await boardModel.deleteOne({ _id: idBoard });
 
   if (deletedCount === 0) return false;
   return true;
@@ -176,4 +192,5 @@ module.exports = {
   changeBoardItem,
   changeBoard,
   shareBoard,
+  dndBoardItem,
 };
