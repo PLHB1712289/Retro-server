@@ -23,7 +23,11 @@ const GET_callback = async (req, res, next) => {
   const { token } = signInWithSocialAccount(req.user.id);
 
   console.log("[GET_CALLBACK] - token:", token);
-  res.cookie("auth", token);
+  res.cookie("auth", token, {
+    maxAge: oneDayToSeconds,
+    httpOnly: true,
+    secure: true,
+  });
   res.redirect(
     `${
       resources.ENVIRONMENT === "CUS"
