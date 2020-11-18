@@ -7,8 +7,6 @@ const axiosClient = require("../api");
 const userModel = require("../database/schema/user");
 const resources = require("../resources");
 
-console.log(resources);
-
 const configPassport = (passport) => {
   // Config for Jwtstrategy
   const option = {};
@@ -30,8 +28,8 @@ const configPassport = (passport) => {
         clientSecret: "b5e45666544c5c686f0242ce456056f2",
         callbackURL: `https://${
           resources.ENVIRONMENT === "CUS"
-            ? resources.URL_CLIENT_PRODUCT
-            : resources.URL_CLIENT_DEV
+            ? resources.URL_SERVER_PRODUCT
+            : resources.URL_SERVER_DEV
         }/auth/facebook/callback`,
       },
       async function (accessToken, refreshToken, profile, cb) {
@@ -76,8 +74,8 @@ const configPassport = (passport) => {
         clientSecret: "XVRlIEJTiXeZV855Pbw8mgeL",
         callbackURL: `https://${
           resources.ENVIRONMENT === "CUS"
-            ? resources.URL_CLIENT_PRODUCT
-            : resources.URL_CLIENT_DEV
+            ? resources.URL_SERVER_PRODUCT
+            : resources.URL_SERVER_DEV
         }/auth/facebook/callback`,
       },
       async function (token, tokenSecret, profile, cb) {
