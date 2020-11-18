@@ -22,11 +22,23 @@ const GET_callback = async (req, res, next) => {
   const { token } = signInWithSocialAccount(req.user.id);
 
   res.cookie("auth", token);
-  res.redirect(`${process.env.URL_CLIENT}/login`);
+  res.redirect(
+    `${
+      process.env.ENVIRONMENT === "CUS"
+        ? process.env.URL_CLIENT_PRODUCT
+        : process.env.URL_CLIENT_DEV
+    }/login`
+  );
 };
 
 const GET_failed = async (req, res, next) => {
-  res.redirect(`${process.env.URL_CLIENT}/login`);
+  res.redirect(
+    `${
+      process.env.ENVIRONMENT === "CUS"
+        ? process.env.URL_CLIENT_PRODUCT
+        : process.env.URL_CLIENT_DEV
+    }/login`
+  );
 };
 
 module.exports = {

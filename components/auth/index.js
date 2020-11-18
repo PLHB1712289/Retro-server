@@ -38,7 +38,11 @@ router.get(
   "/facebook/callback",
 
   passport.authenticate("facebook", {
-    failureRedirect: `${process.env.URL_CLIENT}/login`,
+    failureRedirect: `${
+      process.env.ENVIRONMENT === "CUS"
+        ? process.env.URL_CLIENT_PRODUCT
+        : process.env.URL_CLIENT_DEV
+    }/login`,
     session: false,
   }),
 
@@ -50,7 +54,11 @@ router.get(
 
   passport.authenticate("google", {
     session: false,
-    failureRedirect: `${process.env.URL_CLIENT}/login`,
+    failureRedirect: `${
+      process.env.ENVIRONMENT === "CUS"
+        ? process.env.URL_CLIENT_PRODUCT
+        : process.env.URL_CLIENT_DEV
+    }/login`,
   }),
 
   authController.GET_callback

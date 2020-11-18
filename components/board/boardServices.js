@@ -71,16 +71,14 @@ const changeBoardItem = async (idBoard, item) => {
   const { id, content } = item;
 
   const filter = { _id: id, idBoard };
-  const update = { content };
 
   try {
-    const doc = await itemModel.findOneAndUpdate(filter, update, {
-      new: true,
-    });
+    const doc = await itemModel.findOne(filter);
 
-    if (doc) return true;
+    doc.content = content;
 
-    return false;
+    await doc.save();
+    return true;
   } catch (e) {
     return false;
   }

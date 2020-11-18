@@ -12,7 +12,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const boardRouter = require("./components/board");
 const authRouter = require("./components/auth");
 const userRouter = require("./components/user");
@@ -49,7 +48,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/board", boardRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
