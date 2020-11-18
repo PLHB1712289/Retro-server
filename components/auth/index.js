@@ -30,10 +30,6 @@ router.get(
 
 router.get("/failed", authController.GET_failed);
 
-router.post("/google/sign-in", (req, res) => {
-  res.send("Sign in with google");
-});
-
 router.get(
   "/facebook/callback",
 
