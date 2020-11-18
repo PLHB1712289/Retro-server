@@ -17,7 +17,8 @@ const authRouter = require("./components/auth");
 const userRouter = require("./components/user");
 
 // config passport
-require("./passport/config");
+const { configPassport } = require("./passport/config");
+configPassport(passport);
 
 const app = express();
 
