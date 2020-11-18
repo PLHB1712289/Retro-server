@@ -22,6 +22,7 @@ const POST_signIn = async (req, res) => {
 const GET_callback = async (req, res, next) => {
   const { token } = signInWithSocialAccount(req.user.id);
 
+  console.log("[GET_CALLBACK] - token:", token);
   res.cookie("auth", token);
   res.redirect(
     `${
