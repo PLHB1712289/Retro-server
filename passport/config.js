@@ -27,7 +27,7 @@ const configPassport = (passport) => {
       {
         clientID: "354123862358808",
         clientSecret: "b5e45666544c5c686f0242ce456056f2",
-        callbackURL: `http://${
+        callbackURL: `https://${
           resources.ENVIRONMENT === "CUS"
             ? resources.URL_CLIENT_PRODUCT
             : resources.URL_CLIENT_DEV
@@ -73,7 +73,7 @@ const configPassport = (passport) => {
         clientID:
           "860222154086-lbnk9pk8euko7mtnhu3kpskrs3mgn3bf.apps.googleusercontent.com",
         clientSecret: "XVRlIEJTiXeZV855Pbw8mgeL",
-        callbackURL: `http://${
+        callbackURL: `https://${
           resources.ENVIRONMENT === "CUS"
             ? resources.URL_CLIENT_PRODUCT
             : resources.URL_CLIENT_DEV
