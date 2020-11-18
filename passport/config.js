@@ -3,8 +3,10 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
+const { response } = require("express");
 const axiosClient = require("../api");
 const userModel = require("../database/schema/user");
+const resources = require("../resources");
 
 const configPassport = (passport) => {
   // Config for Jwtstrategy
@@ -25,7 +27,11 @@ const configPassport = (passport) => {
       {
         clientID: "354123862358808",
         clientSecret: "b5e45666544c5c686f0242ce456056f2",
-        callbackURL: "http://localhost:3000/auth/facebook/callback",
+        callbackURL: `http://${
+          resources.ENVIRONMENT === "CUS"
+            ? resources.URL_CLIENT_PRODUCT
+            : resources.URL_CLIENT_DEV
+        }/auth/facebook/callback`,
       },
       async function (accessToken, refreshToken, profile, cb) {
         const url = `/${profile.id}`;
@@ -67,7 +73,11 @@ const configPassport = (passport) => {
         clientID:
           "860222154086-lbnk9pk8euko7mtnhu3kpskrs3mgn3bf.apps.googleusercontent.com",
         clientSecret: "XVRlIEJTiXeZV855Pbw8mgeL",
-        callbackURL: "http://localhost:3000/auth/google/callback",
+        callbackURL: `http://${
+          resources.ENVIRONMENT === "CUS"
+            ? resources.URL_CLIENT_PRODUCT
+            : resources.URL_CLIENT_DEV
+        }/auth/facebook/callback`,
       },
       async function (token, tokenSecret, profile, cb) {
         const { email, name: fullName } = profile._json;
