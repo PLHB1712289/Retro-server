@@ -1,4 +1,5 @@
 const { signIn, signUp, signInWithSocialAccount } = require("./authServices");
+const resources = require("../../resources");
 
 const POST_signUp = async (req, res) => {
   const { status, errorMessage: message } = await signUp(req.body);
@@ -24,9 +25,9 @@ const GET_callback = async (req, res, next) => {
   res.cookie("auth", token);
   res.redirect(
     `${
-      process.env.ENVIRONMENT === "CUS"
-        ? process.env.URL_CLIENT_PRODUCT
-        : process.env.URL_CLIENT_DEV
+      resources.ENVIRONMENT === "CUS"
+        ? resources.URL_CLIENT_PRODUCT
+        : resources.URL_CLIENT_DEV
     }/login`
   );
 };
@@ -34,9 +35,9 @@ const GET_callback = async (req, res, next) => {
 const GET_failed = async (req, res, next) => {
   res.redirect(
     `${
-      process.env.ENVIRONMENT === "CUS"
-        ? process.env.URL_CLIENT_PRODUCT
-        : process.env.URL_CLIENT_DEV
+      resources.ENVIRONMENT === "CUS"
+        ? resources.URL_CLIENT_PRODUCT
+        : resources.URL_CLIENT_DEV
     }/login`
   );
 };

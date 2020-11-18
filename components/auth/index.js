@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-
 const passport = require("passport");
 
 const authController = require("./authController");
+const resources = require("../../resources");
 
 /* GET home page. */
 router.post("/", authController.POST_signUp);
@@ -39,9 +39,9 @@ router.get(
 
   passport.authenticate("facebook", {
     failureRedirect: `${
-      process.env.ENVIRONMENT === "CUS"
-        ? process.env.URL_CLIENT_PRODUCT
-        : process.env.URL_CLIENT_DEV
+      resources.ENVIRONMENT === "CUS"
+        ? resources.URL_CLIENT_PRODUCT
+        : resources.URL_CLIENT_DEV
     }/login`,
     session: false,
   }),
@@ -55,9 +55,9 @@ router.get(
   passport.authenticate("google", {
     session: false,
     failureRedirect: `${
-      process.env.ENVIRONMENT === "CUS"
-        ? process.env.URL_CLIENT_PRODUCT
-        : process.env.URL_CLIENT_DEV
+      resources.ENVIRONMENT === "CUS"
+        ? resources.URL_CLIENT_PRODUCT
+        : resources.URL_CLIENT_DEV
     }/login`,
   }),
 

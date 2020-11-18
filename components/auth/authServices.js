@@ -44,8 +44,6 @@ const signInWithSocialAccount = (id) => {
   const payload = { id };
   const token = jwt.sign(payload, secretKey);
 
-  console.log("token", token);
-
   return { token, errorMessage: "Sign in success" };
 };
 

@@ -16,15 +16,13 @@ const boardRouter = require("./components/board");
 const authRouter = require("./components/auth");
 const userRouter = require("./components/user");
 
+// connect db
+require("./database/connect")();
+
 // config passport
-const { configPassport } = require("./passport/config");
-configPassport(passport);
+require("./passport/config").configPassport(passport);
 
 const app = express();
-
-const connect = require("./database/connect");
-connect();
-require("./database/dataExample");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
