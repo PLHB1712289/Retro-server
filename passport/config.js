@@ -84,7 +84,7 @@ const configPassport = (passport) => {
           resources.ENVIRONMENT === "CUS"
             ? resources.URL_SERVER_PRODUCT
             : resources.URL_SERVER_DEV
-        }/auth/facebook/callback`,
+        }/auth/google/callback`,
       },
       async function (token, tokenSecret, profile, cb) {
         const { email, name: fullName } = profile._json;
