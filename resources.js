@@ -9,7 +9,7 @@ const URL_SERVER_PRODUCT = "https://retro-server-api.herokuapp.com";
 
 const CREATE_DATA_EXAMPLE = false;
 
-const ENVIRONMENT = "CUSS";
+const ENVIRONMENT = "CUS";
 
 module.exports = {
   URL_DATABASE,
