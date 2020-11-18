@@ -24,7 +24,6 @@ const GET_callback = async (req, res, next) => {
 
   console.log("[GET_CALLBACK] - token:", token);
   res.cookie("auth", token, {
-    maxAge: oneDayToSeconds,
     httpOnly: true,
     secure: true,
   });
