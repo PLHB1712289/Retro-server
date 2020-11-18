@@ -3,10 +3,11 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-const { response } = require("express");
 const axiosClient = require("../api");
 const userModel = require("../database/schema/user");
 const resources = require("../resources");
+
+console.log(resources);
 
 const configPassport = (passport) => {
   // Config for Jwtstrategy
